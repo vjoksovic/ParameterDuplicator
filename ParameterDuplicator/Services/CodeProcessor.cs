@@ -1,27 +1,31 @@
 using Microsoft.CodeAnalysis.CSharp;
 using ParameterDuplicator.Rewriters;
 using ParameterDuplicator.Utils;
+using ParameterDuplicator.Interfaces;
 
 namespace ParameterDuplicator.Services;
 
-public class CodeProcessor
+// CodeProcessor is the service that processes the syntax tree of the input file
+// It implements the IProcessInterface interface
+public class CodeProcessor : IProcessInterface
 {
     private readonly CodeRewriter _rewriter;
 
+    // Constructor to inject the rewriter
     public CodeProcessor(CodeRewriter rewriter)
     {
         _rewriter = rewriter;
     }
 
-    private CSharpSyntaxNode ProcessSyntaxTree(String inputPath)
+    public CSharpSyntaxNode ProcessSyntaxTree(string inputPath)
     {
-        CSharpSyntaxNode root = FileHelper.GetSyntaxTreeRoot(inputPath);
+        var root = FileHelper.GetSyntaxTreeRoot(inputPath);
         return (CSharpSyntaxNode) _rewriter.Visit(root);
     }
 
     public void ProcessAndSaveSyntaxTree(string inputFilePath)
     {
-        CSharpSyntaxNode processedRoot = ProcessSyntaxTree(inputFilePath);
+        var processedRoot = ProcessSyntaxTree(inputFilePath);
         FileHelper.RecordOutputFile(processedRoot,  inputFilePath);
     }
 }
