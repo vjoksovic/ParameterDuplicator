@@ -4,7 +4,6 @@ namespace ParameterDuplicator.Utils;
 
 public class FileHelper
 {
-    // Get the syntax tree of the input file
     private static CSharpSyntaxTree GetSyntaxTree(string path)
     {
         try
@@ -26,14 +25,12 @@ public class FileHelper
             throw new InvalidOperationException($"Error reading file {path}: {ex.Message}", ex);
         }
     }
-
-    // Get the root of the syntax tree of the input file
+    
     public static CSharpSyntaxNode GetSyntaxTreeRoot(string path)
     {
         return GetSyntaxTree(path).GetRoot();
     }
-
-    // Record the output file
+    
     public static void RecordOutputFile(CSharpSyntaxNode processedNode, string inputFilePath)
     {
         try
