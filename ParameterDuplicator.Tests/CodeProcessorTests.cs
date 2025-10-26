@@ -1,7 +1,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ParameterDuplicator.Rewriters;
-using ParameterDuplicator.Services;
+using ParameterDuplicator.Processors;
 using ParameterDuplicator.Utils;
 
 namespace ParameterDuplicator.Tests;
